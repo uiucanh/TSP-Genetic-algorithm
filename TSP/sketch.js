@@ -13,10 +13,9 @@ var numGen = 0;
 var genLimit = 100;
 var bestFitness = 0;
 
-function resetVariables(nCities = 12, nPop = 300, nGen = 100) {
+function resetVariables(nCities = 12, nPop = 300) {
   totalCities = nCities;
   populationSize = nPop;
-  genLimit = nGen;
   population = [];
   cities = [];
   fitness = [];
