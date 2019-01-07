@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travelling Salesperson</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+    crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="../p5.min.js"></script>
+  <script src="../addons/p5.dom.min.js"></script>
+  <script src="../addons/p5.sound.min.js"></script>
+  <script src="sketch.js"></script>
+  <script src="ga.js"></script>
+</head>
+
+<body>
+  <div class="container mb-4" align="center">
+    <div class="row justify-content-md-center">
+      <div class="col-">
+        <div id="sketch-holder">
+          <!-- Our sketch will go here! -->
+        </div>
+      </div>
+      <div class="w-100"></div><br>
+
+      <div class="col-3 text-left">
+        <form id="setForm">
+          Generations per second:
+      </div>
+      <div class="col-2 w-50">
+        <input type="range" id="fps-slider" min="1" max="60" value="30">
+        </form>
+      </div>
+      <div class="w-100"></div>
+
+      <div class="col-3 text-left">
+        Number of generations:
+      </div>
+      <div class="col-2">
+        <div class="num-gen">
+          <p>0</p>
+        </div>
+      </div>
+      <div class="w-100"></div>
+
+      <div class="col-3 text-left">
+        Best fitness:
+      </div>
+      <div class="col-2">
+        <div class="best-fitness">
+          <p>0</p>
+        </div>
+      </div>
+      <div class="w-100"></div>
+
+      <div class="col-3 text-left">
+        <form id="setForm">
+          Number of cities:
+      </div>
+      <div class="col-2">
+        <input type="number" id="nCities" class="w-75">
+        </form>
+      </div>
+      <div class="w-100"></div>
+
+      <div class="col-3 text-left">
+        <form id="setForm">
+          Population size:
+      </div>
+      <div class="col-2">
+        <input type="number" id="nPop" class="w-75" min="1">
+        </form>
+      </div>
+      <div class="w-100"></div>
+
+      <div class="col-3 text-left">
+          <form id="setForm">
+            Maximum number of generations:
+        </div>
+        <div class="col-2">
+          <input type="number" id="nGenLimit" class="w-75" value="100">
+          </form>
+        </div>
+        <div class="w-100"></div>
+
+    </div>
+  </div>
+
+</body>
+<script>
+  window.onload = function () {
+    document.getElementById('nCities').value = totalCities;
+    document.getElementById('nPop').value = populationSize;
+  };
+
+  $('#nPop').bind('input', function () {
+    if (this.value < 1){
+      return;
+    }
+    resetVariables($('#nCities').value, this.value);
+  });
+
+  $('#nCities').bind('input', function () {
+    if (this.value < 1){
+      return;
+    }
+    resetVariables(this.value, $('#nPop').value);
+  });
+
+  $('#nGenLimit').bind('input', function () {
+    if (this.value < 1){
+      return;
+    }
+    genLimit = this.value;
+    // resetVariables($('#nCities').value, $('#nPop').value, this.value);
+  });
+
+  $("#fps-slider").change(function () {
+    frameRate(parseInt(this.value));
+  });
+
+</script>
+
+</html>
